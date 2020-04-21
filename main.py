@@ -1,4 +1,5 @@
 import numpy as np
+import time
 from qiskit import QuantumCircuit, execute, Aer
 
 simulator = Aer.get_backend('qasm_simulator')
@@ -6,6 +7,8 @@ simulator = Aer.get_backend('qasm_simulator')
 def Uf(circuit):
     circuit.cx(0, 1)
     pass
+
+cur_time = time.time()
 
 circuit = QuantumCircuit(2, 1)
 
@@ -27,3 +30,4 @@ result = job.result()
 counts = result.get_counts(circuit)
 
 print("f(0) == f(1) is", not bool(int(next(iter(counts)))))
+print("Took", time.time() - cur_time, "seconds")
