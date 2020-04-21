@@ -6,7 +6,7 @@ simulator = Aer.get_backend('qasm_simulator')
 
 def Uf(circuit):
     circuit.cx(0, 1)
-    pass
+    circuit.x(1)
 
 cur_time = time.time()
 
@@ -25,9 +25,11 @@ circuit.measure(0, 0)
 
 print(circuit.draw())
 
-job = execute(circuit, simulator, shots=1)
+job = execute(circuit, simulator, shots=1000000)
 result = job.result()
 counts = result.get_counts(circuit)
 
-print("f(0) == f(1) is", not bool(int(next(iter(counts)))))
+key = next(iter(counts))
+print("f(0) == f(1) is", not bool(int(key)))
+print("Counts:", counts[key])
 print("Took", time.time() - cur_time, "seconds")
