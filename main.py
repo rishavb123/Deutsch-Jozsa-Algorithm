@@ -7,7 +7,6 @@ def Uf(circuit):
     circuit.cx(0, 1)
     pass
 
-
 circuit = QuantumCircuit(2, 1)
 
 circuit.x(1)
